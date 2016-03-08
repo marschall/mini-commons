@@ -71,21 +71,6 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Adds the result of <code>super.equals()</code> to this builder.</p>
-   *
-   * @param superEquals  the result of calling <code>super.equals()</code>
-   * @return EqualsBuilder - used to chain calls.
-   * @since 2.0
-   */
-  public EqualsBuilder appendSuper(final boolean superEquals) {
-    if (isEquals == false) {
-      return this;
-    }
-    isEquals = superEquals;
-    return this;
-  }
-
-  /**
    * <p>Test if two <code>Object</code>s are equal using their
    * <code>equals</code> method.</p>
    *
@@ -93,7 +78,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand object
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final Object lhs, final Object rhs) {
+  public EqualsBuilder append(Object lhs, Object rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -104,7 +89,7 @@ public final class EqualsBuilder {
       isEquals = false;
       return this;
     }
-    final Class<?> lhsClass = lhs.getClass();
+    Class<?> lhsClass = lhs.getClass();
     if (!lhsClass.isArray()) {
       // The simple case, not an array, just test the element
       isEquals = lhs.equals(rhs);
@@ -148,7 +133,7 @@ public final class EqualsBuilder {
    *                  the right hand <code>long</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final long lhs, final long rhs) {
+  public EqualsBuilder append(long lhs, long rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -163,7 +148,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>int</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final int lhs, final int rhs) {
+  public EqualsBuilder append(int lhs, int rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -178,7 +163,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>short</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final short lhs, final short rhs) {
+  public EqualsBuilder append(short lhs, short rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -193,7 +178,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>char</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final char lhs, final char rhs) {
+  public EqualsBuilder append(char lhs, char rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -208,7 +193,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>byte</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final byte lhs, final byte rhs) {
+  public EqualsBuilder append(byte lhs, byte rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -229,7 +214,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>double</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final double lhs, final double rhs) {
+  public EqualsBuilder append(double lhs, double rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -249,7 +234,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>float</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final float lhs, final float rhs) {
+  public EqualsBuilder append(float lhs, float rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -263,7 +248,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>boolean</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final boolean lhs, final boolean rhs) {
+  public EqualsBuilder append(boolean lhs, boolean rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -281,7 +266,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>Object[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final Object[] lhs, final Object[] rhs) {
+  public EqualsBuilder append(Object[] lhs, Object[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -312,7 +297,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>long[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final long[] lhs, final long[] rhs) {
+  public EqualsBuilder append(long[] lhs, long[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -343,7 +328,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>int[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final int[] lhs, final int[] rhs) {
+  public EqualsBuilder append(int[] lhs, int[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -374,7 +359,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>short[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final short[] lhs, final short[] rhs) {
+  public EqualsBuilder append(short[] lhs, short[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -405,7 +390,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>char[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final char[] lhs, final char[] rhs) {
+  public EqualsBuilder append(char[] lhs, char[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -436,7 +421,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>byte[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final byte[] lhs, final byte[] rhs) {
+  public EqualsBuilder append(byte[] lhs, byte[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -467,7 +452,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>double[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final double[] lhs, final double[] rhs) {
+  public EqualsBuilder append(double[] lhs, double[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -498,7 +483,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>float[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final float[] lhs, final float[] rhs) {
+  public EqualsBuilder append(float[] lhs, float[] rhs) {
     if (isEquals == false) {
       return this;
     }
@@ -529,7 +514,7 @@ public final class EqualsBuilder {
    * @param rhs  the right hand <code>boolean[]</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder append(final boolean[] lhs, final boolean[] rhs) {
+  public EqualsBuilder append(boolean[] lhs, boolean[] rhs) {
     if (isEquals == false) {
       return this;
     }
