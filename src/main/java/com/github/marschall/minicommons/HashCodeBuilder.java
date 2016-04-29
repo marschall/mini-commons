@@ -350,6 +350,26 @@ public final class HashCodeBuilder {
   public HashCodeBuilder append(Object object) {
     if (object == null) {
       total = total * 37;
+    } else {
+      total = total * 37 + object.hashCode();
+    }
+    return this;
+  }
+
+  /**
+   * <p>
+   * Append a <code>hashCode</code> for an <code>Object</code>.
+   * </p>
+   *
+   * <p>Unlike {@link #append(Object)} also deals with arrays.</p>
+   *
+   * @param object
+   *            the Object to add to the <code>hashCode</code>
+   * @return this
+   */
+  public HashCodeBuilder appendGeneric(Object object) {
+    if (object == null) {
+      total = total * 37;
 
     } else {
       if(object.getClass().isArray()) {

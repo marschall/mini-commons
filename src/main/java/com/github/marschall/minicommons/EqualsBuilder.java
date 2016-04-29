@@ -1,5 +1,7 @@
 package com.github.marschall.minicommons;
 
+import java.util.Objects;
+
 /**
  * Assists in implementing {@link Object#equals(Object)} methods.
  *
@@ -79,6 +81,25 @@ public final class EqualsBuilder {
    * @return EqualsBuilder - used to chain calls.
    */
   public EqualsBuilder append(Object lhs, Object rhs) {
+    if (isEquals == false) {
+      return this;
+    }
+    isEquals = Objects.equals(lhs, rhs);
+    return this;
+  }
+
+  /**
+   * <p>Test if two <code>Object</code>s are equal using their
+   * <code>equals</code> method.</p>
+   *
+   * <p>Unlike {@link #append(Object, Object)} also deals with
+   * arrays.</p>
+   *
+   * @param lhs  the left hand object
+   * @param rhs  the right hand object
+   * @return EqualsBuilder - used to chain calls.
+   */
+  public EqualsBuilder appendGeneric(Object lhs, Object rhs) {
     if (isEquals == false) {
       return this;
     }
