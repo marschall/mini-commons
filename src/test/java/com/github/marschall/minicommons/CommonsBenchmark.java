@@ -49,6 +49,26 @@ public class CommonsBenchmark {
     return state.oneCommons.hashCode();
   }
 
+  @Benchmark
+  public boolean arrayEqualsMini(TestState state) {
+    return state.oneArrayMini.equals(state.twoArrayMini);
+  }
+
+  @Benchmark
+  public boolean arrayEqualsCommons(TestState state) {
+    return state.oneArrayCommons.equals(state.twoArrayCommons);
+  }
+
+  @Benchmark
+  public int arrayHashCodeMini(TestState state) {
+    return state.oneArrayMini.hashCode();
+  }
+
+  @Benchmark
+  public int arrayHashCodeCommons(TestState state) {
+    return state.oneArrayCommons.hashCode();
+  }
+
 
   @State(Scope.Thread)
   public static class TestState {
@@ -56,16 +76,28 @@ public class CommonsBenchmark {
     ModelClass oneMini;
     ModelClass twoMini;
 
+    ArrayModel oneArrayMini;
+    ArrayModel twoArrayMini;
+
     CommonsModelClass oneCommons;
     CommonsModelClass twoCommons;
+
+    CommonsArrayModel oneArrayCommons;
+    CommonsArrayModel twoArrayCommons;
 
     @Setup(Level.Iteration)
     public void setup() {
       this.oneMini = new ModelClass(1L, "name1");
       this.twoMini = new ModelClass(1L, "name2");
 
+      this.oneArrayMini = new ArrayModel(1L, "name1", "desc1");
+      this.twoArrayMini = new ArrayModel(1L, "name1", "desc2");
+
       this.oneCommons = new CommonsModelClass(1L, "name1");
       this.twoCommons = new CommonsModelClass(1L, "name2");
+
+      this.oneArrayCommons = new CommonsArrayModel(1L, "name1", "desc1");
+      this.twoArrayCommons = new CommonsArrayModel(1L, "name1", "desc2");
     }
   }
 
