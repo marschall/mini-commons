@@ -1,5 +1,6 @@
 package com.github.marschall.minicommons;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -22,7 +23,7 @@ import java.util.Objects;
  * versa.</p>
  *
  * <p>Typical use for the code is as follows:</p>
- * <pre>
+ * <pre><code>
  * public boolean equals(Object obj) {
  *   if (obj == null) { return false; }
  *   if (obj == this) { return true; }
@@ -37,22 +38,7 @@ import java.util.Objects;
  *                 .append(field3, rhs.field3)
  *                 .isEquals();
  *  }
- * </pre>
- *
- * <p> Alternatively, there is a method that uses reflection to determine
- * the fields to test. Because these fields are usually private, the method,
- * <code>reflectionEquals</code>, uses <code>AccessibleObject.setAccessible</code> to
- * change the visibility of the fields. This will fail under a security
- * manager, unless the appropriate permissions are set up correctly. It is
- * also slower than testing explicitly.  Non-primitive fields are compared using
- * <code>equals()</code>.</p>
- *
- * <p> A typical invocation for this method would look like:</p>
- * <pre>
- * public boolean equals(Object obj) {
- *   return EqualsBuilder.reflectionEquals(this, obj);
- * }
- * </pre>
+ * </code></pre>
  */
 public final class EqualsBuilder {
 
@@ -63,7 +49,7 @@ public final class EqualsBuilder {
   private boolean isEquals;
 
   /**
-   * <p>Constructor for EqualsBuilder.</p>
+   * Constructor for EqualsBuilder.
    *
    * <p>Starts off assuming that equals is <code>true</code>.</p>
    * @see Object#equals(Object)
@@ -73,8 +59,8 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>Object</code>s are equal using their
-   * <code>equals</code> method.</p>
+   * Test if two <code>Object</code>s are equal using their
+   * <code>equals</code> method.
    *
    * @param lhs  the left hand object
    * @param rhs  the right hand object
@@ -89,8 +75,8 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>Object</code>s are equal using their
-   * <code>equals</code> method.</p>
+   * Test if two <code>Object</code>s are equal using their
+   * <code>equals</code> method.
    *
    * <p>Unlike {@link #append(Object, Object)} also deals with
    * arrays.</p>
@@ -99,54 +85,16 @@ public final class EqualsBuilder {
    * @param rhs  the right hand object
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder appendGeneric(Object lhs, Object rhs) {
+  public EqualsBuilder appendDeep(Object lhs, Object rhs) {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    Class<?> lhsClass = lhs.getClass();
-    if (!lhsClass.isArray()) {
-      // The simple case, not an array, just test the element
-      isEquals = lhs.equals(rhs);
-    } else if (lhs.getClass() != rhs.getClass()) {
-      // Here when we compare different dimensions, for example: a boolean[][] to a boolean[]
-      isEquals = false;
-    }
-    // 'Switch' on type of array, to dispatch to the correct handler
-    // This handles multi dimensional arrays of the same depth
-    else if (lhs instanceof long[]) {
-      append((long[]) lhs, (long[]) rhs);
-    } else if (lhs instanceof int[]) {
-      append((int[]) lhs, (int[]) rhs);
-    } else if (lhs instanceof short[]) {
-      append((short[]) lhs, (short[]) rhs);
-    } else if (lhs instanceof char[]) {
-      append((char[]) lhs, (char[]) rhs);
-    } else if (lhs instanceof byte[]) {
-      append((byte[]) lhs, (byte[]) rhs);
-    } else if (lhs instanceof double[]) {
-      append((double[]) lhs, (double[]) rhs);
-    } else if (lhs instanceof float[]) {
-      append((float[]) lhs, (float[]) rhs);
-    } else if (lhs instanceof boolean[]) {
-      append((boolean[]) lhs, (boolean[]) rhs);
-    } else {
-      // Not an array of primitives
-      append((Object[]) lhs, (Object[]) rhs);
-    }
+    isEquals = Objects.deepEquals(lhs, rhs);
     return this;
   }
 
   /**
-   * <p>
    * Test if two <code>long</code> s are equal.
-   * </p>
    *
    * @param lhs
    *                  the left hand <code>long</code>
@@ -163,7 +111,7 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>int</code>s are equal.</p>
+   * Test if two <code>int</code>s are equal.
    *
    * @param lhs  the left hand <code>int</code>
    * @param rhs  the right hand <code>int</code>
@@ -178,7 +126,7 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>short</code>s are equal.</p>
+   * Test if two <code>short</code>s are equal.
    *
    * @param lhs  the left hand <code>short</code>
    * @param rhs  the right hand <code>short</code>
@@ -193,7 +141,7 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>char</code>s are equal.</p>
+   * Test if two <code>char</code>s are equal.
    *
    * @param lhs  the left hand <code>char</code>
    * @param rhs  the right hand <code>char</code>
@@ -208,7 +156,7 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>byte</code>s are equal.</p>
+   * Test if two <code>byte</code>s are equal.
    *
    * @param lhs  the left hand <code>byte</code>
    * @param rhs  the right hand <code>byte</code>
@@ -223,8 +171,8 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>double</code>s are equal by testing that the
-   * pattern of bits returned by <code>doubleToLong</code> are equal.</p>
+   * Test if two <code>double</code>s are equal by testing that the
+   * pattern of bits returned by <code>doubleToLong</code> are equal.
    *
    * <p>This handles NaNs, Infinities, and <code>-0.0</code>.</p>
    *
@@ -243,8 +191,8 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>float</code>s are equal byt testing that the
-   * pattern of bits returned by doubleToLong are equal.</p>
+   * Test if two <code>float</code>s are equal byt testing that the
+   * pattern of bits returned by doubleToLong are equal.
    *
    * <p>This handles NaNs, Infinities, and <code>-0.0</code>.</p>
    *
@@ -263,7 +211,7 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Test if two <code>booleans</code>s are equal.</p>
+   * Test if two <code>booleans</code>s are equal.
    *
    * @param lhs  the left hand <code>boolean</code>
    * @param rhs  the right hand <code>boolean</code>
@@ -278,10 +226,7 @@ public final class EqualsBuilder {
   }
 
   /**
-   * <p>Performs a deep comparison of two <code>Object</code> arrays.</p>
-   *
-   * <p>This also will be called for the top level of
-   * multi-dimensional, ragged, and multi-typed arrays.</p>
+   * Performs a one level comparison of two <code>Object</code> arrays.
    *
    * @param lhs  the left hand <code>Object[]</code>
    * @param rhs  the right hand <code>Object[]</code>
@@ -291,20 +236,25 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
+    isEquals = Arrays.equals(lhs, rhs);
+    return this;
+  }
+
+  /**
+   * Performs a deep comparison of two <code>Object</code> arrays.
+   *
+   * <p>This also will be called for the top level of
+   * multi-dimensional, ragged, and multi-typed arrays.</p>
+   *
+   * @param lhs  the left hand <code>Object[]</code>
+   * @param rhs  the right hand <code>Object[]</code>
+   * @return EqualsBuilder - used to chain calls.
+   */
+  public EqualsBuilder appendDeep(Object[] lhs, Object[] rhs) {
+    if (isEquals == false) {
       return this;
     }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.deepEquals(lhs, rhs);
     return this;
   }
 
@@ -322,20 +272,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -353,20 +290,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -384,20 +308,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -415,20 +326,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -446,20 +344,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -477,20 +362,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -508,20 +380,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 
@@ -539,20 +398,7 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    if (lhs == rhs) {
-      return this;
-    }
-    if (lhs == null || rhs == null) {
-      isEquals = false;
-      return this;
-    }
-    if (lhs.length != rhs.length) {
-      isEquals = false;
-      return this;
-    }
-    for (int i = 0; i < lhs.length && isEquals; ++i) {
-      append(lhs[i], rhs[i]);
-    }
+    isEquals = Arrays.equals(lhs, rhs);
     return this;
   }
 

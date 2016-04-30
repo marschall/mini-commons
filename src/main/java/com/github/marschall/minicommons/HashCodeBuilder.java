@@ -26,7 +26,7 @@ package com.github.marschall.minicommons;
  * To use this class write code as follows:
  * </p>
  *
- * <pre>
+ * <pre><code>
  * public class Person {
  *   String name;
  *   int age;
@@ -34,40 +34,18 @@ package com.github.marschall.minicommons;
  *   ...
  *
  *   public int hashCode() {
- *     // you pick a hard-coded, randomly chosen, non-zero, odd number
- *     // ideally different for each class
- *     return new HashCodeBuilder(17, 37).
- *       append(name).
- *       append(age).
- *       append(smoker).
- *       toHashCode();
+ *     return new HashCodeBuilder()
+ *       .append(name)
+ *       .append(age)
+ *       .append(smoker)
+ *       .toHashCode();
  *   }
  * }
- * </pre>
+ * </code></pre>
  *
  * <p>
  * If required, the superclass <code>hashCode()</code> can be added using {@link #appendSuper}.
  * </p>
- *
- * <p>
- * Alternatively, there is a method that uses reflection to determine the fields to test. Because these fields are
- * usually private, the method, <code>reflectionHashCode</code>, uses <code>AccessibleObject.setAccessible</code>
- * to change the visibility of the fields. This will fail under a security manager, unless the appropriate permissions
- * are set up correctly. It is also slower than testing explicitly.
- * </p>
- *
- * <p>
- * A typical invocation for this method would look like:
- * </p>
- *
- * <pre>
- * public int hashCode() {
- *   return HashCodeBuilder.reflectionHashCode(this);
- * }
- * </pre>
- *
- * @since 1.0
- * @version $Id: HashCodeBuilder.java 1627889 2014-09-26 21:19:12Z djones $
  */
 public final class HashCodeBuilder {
 
@@ -367,7 +345,7 @@ public final class HashCodeBuilder {
    *            the Object to add to the <code>hashCode</code>
    * @return this
    */
-  public HashCodeBuilder appendGeneric(Object object) {
+  public HashCodeBuilder appendDeep(Object object) {
     if (object == null) {
       total = total * 37;
 

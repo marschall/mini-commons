@@ -33,7 +33,22 @@ public class CommonsModelClass {
             .toHashCode();
   }
 
+
+
   public static void main(String[] args) {
+    benchmarkHashCode();
+  }
+
+  static void benchmarkHashCode() {
+    int hashCode = 0;
+    CommonsModelClass one = new CommonsModelClass(1L, "name1");
+    for (int i = 0; i < 100_000_000; i++) {
+      hashCode += one.hashCode();
+    }
+    System.out.println(hashCode);
+  }
+
+  static void benchmarkEquals() {
     CommonsModelClass one = new CommonsModelClass(1L, "name1");
     CommonsModelClass two = new CommonsModelClass(1L, "name2");
     for (int i = 0; i < 100_000_000; i++) {
