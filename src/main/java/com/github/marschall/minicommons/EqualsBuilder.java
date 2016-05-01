@@ -59,6 +59,20 @@ public final class EqualsBuilder {
   }
 
   /**
+   * Adds the result of <code>super.equals()</code> to this builder.
+   *
+   * @param superEquals  the result of calling <code>super.equals()</code>
+   * @return EqualsBuilder - used to chain calls.
+   */
+  public EqualsBuilder appendSuper(final boolean superEquals) {
+      if (isEquals == false) {
+          return this;
+      }
+      isEquals = superEquals;
+      return this;
+  }
+
+  /**
    * Test if two <code>Object</code>s are equal using their
    * <code>equals</code> method.
    *
