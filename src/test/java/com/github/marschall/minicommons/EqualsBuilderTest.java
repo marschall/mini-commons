@@ -19,6 +19,30 @@ public class EqualsBuilderTest {
   }
 
   @Test
+  public void appendDouble() {
+    assertTrue(new EqualsBuilder()
+            .append(1.0d, 1.0d)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .append(1.0d, 1.0d)
+            .isEquals());
+
+    assertTrue(new EqualsBuilder()
+            .append(Double.NaN, Double.NaN)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(0.0d, -0.0d)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY)
+            .isEquals());
+  }
+
+  @Test
   public void appendLong() {
     assertTrue(new EqualsBuilder()
             .append(1L, 1L)

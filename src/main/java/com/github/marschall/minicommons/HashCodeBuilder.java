@@ -178,16 +178,15 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>double</code>.
-   * </p>
    *
    * @param value
    *            the double to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(double value) {
-    return append(Double.doubleToLongBits(value));
+    total = total * 37 + Double.hashCode(value);
+    return this;
   }
 
   /**
@@ -287,12 +286,8 @@ public final class HashCodeBuilder {
    *            the long to add to the <code>hashCode</code>
    * @return this
    */
-  // NOTE: This method uses >> and not >>> as Effective Java and
-  //       Long.hashCode do. Ideally we should switch to >>> at
-  //       some stage. There are backwards compat issues, so
-  //       that will have to wait for the time being. cf LANG-342.
   public HashCodeBuilder append(long value) {
-    total = total * 37 + ((int) (value ^ (value >> 32)));
+    total = total * 37 + Long.hashCode(value);
     return this;
   }
 
