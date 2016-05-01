@@ -1,4 +1,4 @@
-Mini Commons
+Mini Commons [![Build Status](https://travis-ci.org/marschall/mini-commons.svg?branch=master)](https://travis-ci.org/marschall/mini-commons)
 ============
 
 Like [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/) but lighter weight.
