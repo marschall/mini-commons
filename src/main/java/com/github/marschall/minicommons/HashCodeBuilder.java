@@ -1,5 +1,7 @@
 package com.github.marschall.minicommons;
 
+import java.util.Objects;
+
 /**
  * Assists in implementing {@link Object#hashCode()} methods.
  *
@@ -321,11 +323,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(Object object) {
-    if (object == null) {
-      total = total * 37;
-    } else {
-      total = total * 37 + object.hashCode();
-    }
+    total = total * 37 + Objects.hashCode(object);
     return this;
   }
 

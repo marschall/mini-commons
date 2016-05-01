@@ -69,35 +69,57 @@ public class CommonsBenchmark {
     return state.oneArrayCommons.hashCode();
   }
 
+  @Benchmark
+  public int longHashCodeMini(TestState state) {
+    return state.oneLongCommons.hashCode();
+  }
+
+  @Benchmark
+  public int longHashCodeCommons(TestState state) {
+    return state.oneLongCommons.hashCode();
+  }
+
 
   @State(Scope.Thread)
   public static class TestState {
 
-    ModelClass oneMini;
-    ModelClass twoMini;
+    Model oneMini;
+    Model twoMini;
 
     ArrayModel oneArrayMini;
     ArrayModel twoArrayMini;
 
-    CommonsModelClass oneCommons;
-    CommonsModelClass twoCommons;
+    LongModel oneLongMini;
+    LongModel twoLongMini;
+
+    CommonsModel oneCommons;
+    CommonsModel twoCommons;
 
     CommonsArrayModel oneArrayCommons;
     CommonsArrayModel twoArrayCommons;
 
+    CommonsLongModel oneLongCommons;
+    CommonsLongModel twoLongCommons;
+
     @Setup(Level.Iteration)
     public void setup() {
-      this.oneMini = new ModelClass(1L, "name1");
-      this.twoMini = new ModelClass(1L, "name2");
+      this.oneMini = new Model(1L, "name1");
+      this.twoMini = new Model(1L, "name2");
 
       this.oneArrayMini = new ArrayModel(1L, "name1", "desc1");
       this.twoArrayMini = new ArrayModel(1L, "name1", "desc2");
 
-      this.oneCommons = new CommonsModelClass(1L, "name1");
-      this.twoCommons = new CommonsModelClass(1L, "name2");
+      this.oneLongMini = new LongModel(1L, 1L);
+      this.twoLongMini = new LongModel(1L, 2L);
+
+      this.oneCommons = new CommonsModel(1L, "name1");
+      this.twoCommons = new CommonsModel(1L, "name2");
 
       this.oneArrayCommons = new CommonsArrayModel(1L, "name1", "desc1");
       this.twoArrayCommons = new CommonsArrayModel(1L, "name1", "desc2");
+
+      this.oneLongCommons = new CommonsLongModel(1L, 1L);
+      this.twoLongCommons = new CommonsLongModel(1L, 2L);
     }
   }
 

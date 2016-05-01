@@ -43,6 +43,30 @@ public class EqualsBuilderTest {
   }
 
   @Test
+  public void appendFloat() {
+    assertTrue(new EqualsBuilder()
+            .append(1.0f, 1.0f)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .append(1.0f, 1.0f)
+            .isEquals());
+
+    assertTrue(new EqualsBuilder()
+            .append(Float.NaN, Float.NaN)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(0.0f, -0.0f)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY)
+            .isEquals());
+  }
+
+  @Test
   public void appendLong() {
     assertTrue(new EqualsBuilder()
             .append(1L, 1L)
