@@ -187,7 +187,8 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    return append(Double.doubleToLongBits(lhs), Double.doubleToLongBits(rhs));
+    isEquals = (Double.doubleToLongBits(lhs) == Double.doubleToLongBits(rhs));
+    return this;
   }
 
   /**
@@ -207,7 +208,8 @@ public final class EqualsBuilder {
     if (isEquals == false) {
       return this;
     }
-    return append(Float.floatToIntBits(lhs), Float.floatToIntBits(rhs));
+    isEquals = (Float.floatToIntBits(lhs) == Float.floatToIntBits(rhs));
+    return this;
   }
 
   /**
