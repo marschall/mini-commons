@@ -51,6 +51,8 @@ import java.util.Objects;
  */
 public final class HashCodeBuilder {
 
+  private static final int MULTPLIER = 37;
+
   /**
    * Running total of the hashCode.
    */
@@ -66,9 +68,8 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>boolean</code>.
-   * </p>
+   *
    * <p>
    * This adds <code>1</code> when true, and <code>0</code> when false to the <code>hashCode</code>.
    * </p>
@@ -87,14 +88,12 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(boolean value) {
-    total = total * 37 + (value ? 0 : 1);
+    total = total * MULTPLIER + (value ? 0 : 1);
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>boolean</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -102,7 +101,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(boolean[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (boolean element : array) {
         append(element);
@@ -112,23 +111,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>byte</code>.
-   * </p>
    *
    * @param value
    *            the byte to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(byte value) {
-    total = total * 37 + value;
+    total = total * MULTPLIER + value;
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>byte</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -136,7 +131,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(byte[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (byte element : array) {
         append(element);
@@ -146,23 +141,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>char</code>.
-   * </p>
    *
    * @param value
    *            the char to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(char value) {
-    total = total * 37 + value;
+    total = total * MULTPLIER + value;
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>char</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -170,7 +161,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(char[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (char element : array) {
         append(element);
@@ -187,14 +178,12 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(double value) {
-    total = total * 37 + Double.hashCode(value);
+    total = total * MULTPLIER + Double.hashCode(value);
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>double</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -202,7 +191,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(double[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (double element : array) {
         append(element);
@@ -212,23 +201,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>float</code>.
-   * </p>
    *
    * @param value
    *            the float to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(float value) {
-    total = total * 37 + Float.floatToIntBits(value);
+    total = total * MULTPLIER + Float.floatToIntBits(value);
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>float</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -236,7 +221,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(float[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (float element : array) {
         append(element);
@@ -246,23 +231,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for an <code>int</code>.
-   * </p>
    *
    * @param value
    *            the int to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(int value) {
-    total = total * 37 + value;
+    total = total * MULTPLIER + value;
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for an <code>int</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -270,7 +251,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(int[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (int element : array) {
         append(element);
@@ -280,23 +261,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>long</code>.
-   * </p>
    *
    * @param value
    *            the long to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(long value) {
-    total = total * 37 + Long.hashCode(value);
+    total = total * MULTPLIER + Long.hashCode(value);
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>long</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -304,7 +281,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(long[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (long element : array) {
         append(element);
@@ -314,23 +291,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for an <code>Object</code>.
-   * </p>
    *
    * @param object
    *            the Object to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(Object object) {
-    total = total * 37 + Objects.hashCode(object);
+    total = total * MULTPLIER + Objects.hashCode(object);
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for an <code>Object</code>.
-   * </p>
    *
    * <p>Unlike {@link #append(Object)} also deals with arrays.</p>
    *
@@ -340,7 +313,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder appendDeep(Object object) {
     if (object == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
 
     } else {
       if(object.getClass().isArray()) {
@@ -367,16 +340,14 @@ public final class HashCodeBuilder {
           append((Object[]) object);
         }
       } else {
-        total = total * 37 + object.hashCode();
+        total = total * MULTPLIER + object.hashCode();
       }
     }
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for an <code>Object</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -384,7 +355,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(Object[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (Object element : array) {
         append(element);
@@ -394,23 +365,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>short</code>.
-   * </p>
    *
    * @param value
    *            the short to add to the <code>hashCode</code>
    * @return this
    */
   public HashCodeBuilder append(short value) {
-    total = total * 37 + value;
+    total = total * MULTPLIER + value;
     return this;
   }
 
   /**
-   * <p>
    * Append a <code>hashCode</code> for a <code>short</code> array.
-   * </p>
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
@@ -418,7 +385,7 @@ public final class HashCodeBuilder {
    */
   public HashCodeBuilder append(short[] array) {
     if (array == null) {
-      total = total * 37;
+      total = total * MULTPLIER;
     } else {
       for (short element : array) {
         append(element);
@@ -428,24 +395,19 @@ public final class HashCodeBuilder {
   }
 
   /**
-   * <p>
    * Adds the result of super.hashCode() to this builder.
-   * </p>
    *
    * @param superHashCode
    *            the result of calling <code>super.hashCode()</code>
    * @return this HashCodeBuilder, used to chain calls.
-   * @since 2.0
    */
   public HashCodeBuilder appendSuper(int superHashCode) {
-    total = total * 37 + superHashCode;
+    total = total * MULTPLIER + superHashCode;
     return this;
   }
 
   /**
-   * <p>
    * Return the computed <code>hashCode</code>.
-   * </p>
    *
    * @return <code>hashCode</code> based on the fields appended
    */
