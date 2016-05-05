@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.marschall</groupId>
   <artifactId>mini-commons</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0-SNAPSHOT</version>
   <inceptionYear>2016</inceptionYear>
   <name>Mini Commons</name>
   <description>A slimmed down version of Apache Commons Lang.</description>
@@ -18,7 +18,7 @@
     <connection>scm:git:git@github.com:marschall/mini-commons.git</connection>
     <developerConnection>scm:git:git@github.com:marschall/mini-commons.git</developerConnection>
     <url>${project.url}</url>
-    <tag>0.1.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
