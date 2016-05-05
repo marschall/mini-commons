@@ -39,6 +39,11 @@ public class CommonsBenchmark {
   }
 
   @Benchmark
+  public boolean equalsManual(TestState state) {
+    return state.oneManual.equals(state.twoManual);
+  }
+
+  @Benchmark
   public int hashCodeMini(TestState state) {
     return state.oneMini.hashCode();
   }
@@ -46,6 +51,11 @@ public class CommonsBenchmark {
   @Benchmark
   public int hashCodeCommons(TestState state) {
     return state.oneCommons.hashCode();
+  }
+
+  @Benchmark
+  public int hashCodeManual(TestState state) {
+    return state.oneManual.hashCode();
   }
 
   @Benchmark
@@ -100,6 +110,9 @@ public class CommonsBenchmark {
     CommonsLongModel oneLongCommons;
     CommonsLongModel twoLongCommons;
 
+    ManualModel oneManual;
+    ManualModel twoManual;
+
     @Setup(Level.Iteration)
     public void setup() {
       this.oneMini = new Model(1L, "not");
@@ -119,6 +132,9 @@ public class CommonsBenchmark {
 
       this.oneLongCommons = new CommonsLongModel(1L, 1L);
       this.twoLongCommons = new CommonsLongModel(1L, 2L);
+
+      this.oneManual = new ManualModel(1L, "not");
+      this.twoManual = new ManualModel(1L, "equal");
     }
   }
 

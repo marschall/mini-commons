@@ -17,3 +17,12 @@ Changes to Apache Commons Lang:
    * use 31 instead of 37 as a hash code multiplier
    * use JDK hash code for booleans
 
+We have a [micro benchmark suite](https://github.com/marschall/mini-commons/blob/master/src/test/java/com/github/marschall/minicommons/CommonsBenchmark.java) where we get about three times the throughput of Apache Commons Lang for `equals` methods. The throughput is comparable to writing `equals` methods without `EqualsBuilder`.
+
+```
+Benchmark                               Mode  Cnt    Score   Error   Units
+CommonsBenchmark.equalsCommons         thrpt  100   86.528 ± 0.329  ops/us
+CommonsBenchmark.equalsManual          thrpt  100  230.947 ± 1.048  ops/us
+CommonsBenchmark.equalsMini            thrpt  100  225.705 ± 1.392  ops/us
+```
+
