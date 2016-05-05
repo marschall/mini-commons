@@ -13,7 +13,7 @@ public class LongModel {
   @Override
   public boolean equals(Object obj) {
     if (obj == this) {
-      return false;
+      return true;
     }
     if (!(obj instanceof LongModel)) {
       return false;

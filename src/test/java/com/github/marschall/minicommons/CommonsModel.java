@@ -13,7 +13,7 @@ public class CommonsModel {
   @Override
   public boolean equals(Object obj) {
     if (obj == this) {
-      return false;
+      return true;
     }
     if (!(obj instanceof CommonsModel)) {
       return false;

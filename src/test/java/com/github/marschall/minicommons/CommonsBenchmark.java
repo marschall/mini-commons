@@ -44,6 +44,11 @@ public class CommonsBenchmark {
   }
 
   @Benchmark
+  public boolean equalsReflection(TestState state) {
+    return state.oneReflection.equals(state.twoReflection);
+  }
+
+  @Benchmark
   public int hashCodeMini(TestState state) {
     return state.oneMini.hashCode();
   }
@@ -56,6 +61,11 @@ public class CommonsBenchmark {
   @Benchmark
   public int hashCodeManual(TestState state) {
     return state.oneManual.hashCode();
+  }
+
+  @Benchmark
+  public int hashCodeReflection(TestState state) {
+    return state.oneReflection.hashCode();
   }
 
   @Benchmark
@@ -113,6 +123,9 @@ public class CommonsBenchmark {
     ManualModel oneManual;
     ManualModel twoManual;
 
+    ReflectionModel oneReflection;
+    ReflectionModel twoReflection;
+
     @Setup(Level.Iteration)
     public void setup() {
       this.oneMini = new Model(1L, "not");
@@ -135,6 +148,9 @@ public class CommonsBenchmark {
 
       this.oneManual = new ManualModel(1L, "not");
       this.twoManual = new ManualModel(1L, "equal");
+
+      this.oneReflection = new ReflectionModel(1L, "not");
+      this.twoReflection = new ReflectionModel(1L, "equal");
     }
   }
 

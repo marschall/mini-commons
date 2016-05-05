@@ -24,7 +24,7 @@ public class ManualModel {
   @Override
   public boolean equals(Object obj) {
     if (obj == this) {
-      return false;
+      return true;
     }
     if (!(obj instanceof ManualModel)) {
       return false;
