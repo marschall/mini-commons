@@ -10,7 +10,7 @@ public class HashCodeBuilderTest {
   @Test
   public void appendObject() {
 
-    assertEquals(new HashCodeBuilder().append(1).toHashCode(), 528);
+    assertEquals(new HashCodeBuilder().append((Object) 1).toHashCode(), 528);
     assertEquals(new HashCodeBuilder().append((Object) null).toHashCode(), 527);
 
 
@@ -130,6 +130,53 @@ public class HashCodeBuilderTest {
 //    assertNotEquals(
 //            new HashCodeBuilder().append(0L).toHashCode(),
 //            new HashCodeBuilder().append(-1L).toHashCode());
+  }
+
+  @Test
+  public void appendInt() {
+
+    assertEquals(
+            new HashCodeBuilder().append(1).toHashCode(),
+            new HashCodeBuilder().append(1).toHashCode());
+
+    assertNotEquals(
+            new HashCodeBuilder().append(1).toHashCode(),
+            new HashCodeBuilder().append(2).toHashCode());
+  }
+
+  @Test
+  public void appendShort() {
+
+    assertEquals(
+            new HashCodeBuilder().append((short) 1).toHashCode(),
+            new HashCodeBuilder().append((short) 1).toHashCode());
+
+    assertNotEquals(
+            new HashCodeBuilder().append((short) 1).toHashCode(),
+            new HashCodeBuilder().append((short) 2).toHashCode());
+  }
+
+  @Test
+  public void appendByte() {
+
+    assertEquals(
+            new HashCodeBuilder().append((byte) 1).toHashCode(),
+            new HashCodeBuilder().append((byte) 1).toHashCode());
+
+    assertNotEquals(
+            new HashCodeBuilder().append((byte) 1).toHashCode(),
+            new HashCodeBuilder().append((byte) 2).toHashCode());
+  }
+
+  @Test
+  public void appendChar() {
+    assertEquals(
+            new HashCodeBuilder().append('1').toHashCode(),
+            new HashCodeBuilder().append('1').toHashCode());
+
+    assertNotEquals(
+            new HashCodeBuilder().append('1').toHashCode(),
+            new HashCodeBuilder().append('2').toHashCode());
   }
 
   @Test
