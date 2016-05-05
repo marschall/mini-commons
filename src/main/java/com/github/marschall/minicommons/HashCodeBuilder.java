@@ -16,7 +16,7 @@ import java.util.Objects;
  * The following is the approach taken. When appending a data field, the current total is multiplied by the
  * multiplier then a relevant value
  * for that data type is added. For example, if the current hashCode is 17, and the multiplier is 37, then
- * appending the integer 45 will create a hashcode of 674, namely 17 * 37 + 45.
+ * appending the integer 45 will create a hashcode of 572, namely 17 * 31 + 45.
  * </p>
  *
  * <p>
@@ -73,7 +73,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the boolean to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    * @see java.lang.Boolean#hashCode(boolean)
    */
   public HashCodeBuilder append(boolean value) {
@@ -86,7 +86,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(boolean[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -98,7 +98,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the byte to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(byte value) {
     total = total * MULTPLIER + value;
@@ -110,7 +110,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(byte[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -122,7 +122,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the char to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(char value) {
     total = total * MULTPLIER + value;
@@ -134,7 +134,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(char[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -146,7 +146,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the double to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(double value) {
     total = total * MULTPLIER + Double.hashCode(value);
@@ -158,7 +158,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(double[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -170,7 +170,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the float to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(float value) {
     total = total * MULTPLIER + Float.hashCode(value);
@@ -182,7 +182,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(float[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -194,7 +194,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the int to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(int value) {
     total = total * MULTPLIER + value;
@@ -206,7 +206,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(int[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -218,7 +218,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the long to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(long value) {
     total = total * MULTPLIER + Long.hashCode(value);
@@ -230,7 +230,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(long[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -242,7 +242,7 @@ public final class HashCodeBuilder {
    *
    * @param object
    *            the Object to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(Object object) {
     total = total * MULTPLIER + Objects.hashCode(object);
@@ -256,7 +256,7 @@ public final class HashCodeBuilder {
    *
    * @param object
    *            the Object to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder appendDeep(Object object) {
     if (object == null) {
@@ -298,7 +298,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(Object[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -308,9 +308,13 @@ public final class HashCodeBuilder {
   /**
    * Append a <code>hashCode</code> for an <code>Object</code> array.
    *
+   * <p>Unlike {@link #append(Object[], Object[])} also deals with
+   * nested arrays.</p>
+   *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
+   * @see Arrays#deepHashCode(Object[])
    */
   public HashCodeBuilder appendDeep(Object[] object) {
     total = total * MULTPLIER + Arrays.deepHashCode(object);
@@ -322,7 +326,7 @@ public final class HashCodeBuilder {
    *
    * @param value
    *            the short to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(short value) {
     total = total * MULTPLIER + value;
@@ -334,7 +338,7 @@ public final class HashCodeBuilder {
    *
    * @param array
    *            the array to add to the <code>hashCode</code>
-   * @return this
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder append(short[] array) {
     total = total * MULTPLIER + Arrays.hashCode(array);
@@ -346,7 +350,7 @@ public final class HashCodeBuilder {
    *
    * @param superHashCode
    *            the result of calling <code>super.hashCode()</code>
-   * @return this HashCodeBuilder, used to chain calls.
+   * @return HashCodeBuilder - used to chain calls
    */
   public HashCodeBuilder appendSuper(int superHashCode) {
     total = total * MULTPLIER + superHashCode;
