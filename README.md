@@ -13,9 +13,7 @@ Changes to Apache Commons Lang:
    * If you want array support use EqualsBuilder#appendDeep(Object, Object) or HashCodeBuilder#appendDeep(Object). Is this the same pattern that `java.util.Objects` and `java.util.Arrays` use.
  * Delegate to `java.util.Objects`, `java.util.Arrays`, `java.lang.Long`, `java.lang.Double` where possible.
    * This may benefit from [future optimizations](http://openjdk.java.net/jeps/8044082).
-
-More JDK compliant hashing:
-
- * use 31 instead of 37 as a hash code multiplier
- * use JDK hash code for booleans
+ * More JDK compliant hashing:
+   * use 31 instead of 37 as a hash code multiplier
+   * use JDK hash code for booleans
 
