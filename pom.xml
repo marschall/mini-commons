@@ -6,7 +6,7 @@
   <artifactId>mini-commons</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <inceptionYear>2016</inceptionYear>
-  <name>mini-commons</name>
+  <name>Mini Commons</name>
   <description>A slimmed down version of Apache Commons Lang.</description>
 
   <prerequisites>

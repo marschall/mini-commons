@@ -18,6 +18,22 @@ public class HashCodeBuilderTest {
                     new HashCodeBuilder().append((Object) new String[]{"one"}).toHashCode());
   }
 
+
+  @Test
+  public void appendSuper() {
+    assertNotEquals(new HashCodeBuilder().append("one").toHashCode(),
+                    new HashCodeBuilder().appendSuper(1).append("one").toHashCode());
+  }
+
+  @Test
+  public void appendObjectArray() {
+    assertEquals(new HashCodeBuilder().append(new String[]{"one"}).toHashCode(),
+                 new HashCodeBuilder().append(new String[]{"one"}).toHashCode());
+
+    assertNotEquals(new HashCodeBuilder().append(new String[]{"one"}).toHashCode(),
+                    new HashCodeBuilder().append(new String[]{null}).toHashCode());
+  }
+
   @Test
   public void appendDeepObject() {
 

@@ -89,13 +89,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(boolean[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (boolean element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -119,13 +113,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(byte[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (byte element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -149,13 +137,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(char[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (char element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -179,13 +161,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(double[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (double element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -209,13 +185,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(float[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (float element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -239,13 +209,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(int[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (int element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -269,13 +233,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(long[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (long element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -343,13 +301,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(Object[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (Object element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
@@ -385,13 +337,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(short[] array) {
-    if (array == null) {
-      total = total * MULTPLIER;
-    } else {
-      for (short element : array) {
-        append(element);
-      }
-    }
+    total = total * MULTPLIER + Arrays.hashCode(array);
     return this;
   }
 
