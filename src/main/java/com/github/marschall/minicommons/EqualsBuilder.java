@@ -64,7 +64,7 @@ public final class EqualsBuilder {
    * @param superEquals  the result of calling <code>super.equals()</code>
    * @return EqualsBuilder - used to chain calls.
    */
-  public EqualsBuilder appendSuper(final boolean superEquals) {
+  public EqualsBuilder appendSuper(boolean superEquals) {
       if (isEquals == false) {
           return this;
       }

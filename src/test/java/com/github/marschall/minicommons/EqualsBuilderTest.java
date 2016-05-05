@@ -19,6 +19,141 @@ public class EqualsBuilderTest {
   }
 
   @Test
+  public void appendObject() {
+    assertTrue(new EqualsBuilder()
+            .append("one", new String("one"))
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append("one", "two")
+            .isEquals());
+
+
+    // chaining
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .append("one", "one")
+            .isEquals());
+
+    // nulls
+    assertFalse(new EqualsBuilder()
+            .append("one", null)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append("one", null)
+            .isEquals());
+
+    // arrays
+    Object array = new String[]{"one"};
+    assertTrue(new EqualsBuilder()
+            .append(array, array) // identity
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append((Object) new String[]{"one"}, (Object) new String[]{"one"})
+            .isEquals());
+  }
+
+  @Test
+  public void appendObjectDeep() {
+    assertTrue(new EqualsBuilder()
+            .appendDeep("one", new String("one"))
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep("one", "two")
+            .isEquals());
+
+
+    // chaining
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .appendDeep("one", "one")
+            .isEquals());
+
+    // nulls
+    assertFalse(new EqualsBuilder()
+            .appendDeep("one", null)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep("one", null)
+            .isEquals());
+
+    // arrays
+    Object array = new String[]{"one"};
+    assertTrue(new EqualsBuilder()
+            .appendDeep(array, array) // identity
+            .isEquals());
+
+    assertTrue(new EqualsBuilder()
+            .appendDeep((Object) new String[]{"one"}, (Object) new String[]{"one"})
+            .isEquals());
+
+    // multi dimensional arrays
+    assertFalse(new EqualsBuilder()
+            .appendDeep((Object) new String[][]{new String[]{"one"}}, (Object) new String[]{"one"})
+            .isEquals());
+
+    assertTrue(new EqualsBuilder()
+            .appendDeep((Object) new String[][]{new String[]{"one"}}, (Object) new String[][]{new String[]{"one"}})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep((Object) new String[][]{new String[]{"one"}}, (Object) new String[][]{new String[]{"two"}})
+            .isEquals());
+  }
+
+  @Test
+  public void appendObjectArrayDeep() {
+    assertTrue(new EqualsBuilder()
+            .appendDeep(new String[]{"one"}, new String[]{"one"})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep(new String[]{"one"}, new String[]{"two"})
+            .isEquals());
+
+
+    // chaining
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .appendDeep(new String[]{"one"}, new String[]{"one"})
+            .isEquals());
+
+    // nulls
+    assertFalse(new EqualsBuilder()
+            .appendDeep(new String[]{"one"}, new String[]{null})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep(new String[]{null}, new String[]{"one"})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep(new String[]{"one"}, null)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep(null, new String[]{"one"})
+            .isEquals());
+
+    // multi dimensional arrays
+    assertFalse(new EqualsBuilder()
+            .appendDeep(new String[][]{new String[]{"one"}}, new String[]{"one"})
+            .isEquals());
+
+    assertTrue(new EqualsBuilder()
+            .appendDeep(new String[][]{new String[]{"one"}}, new String[][]{new String[]{"one"}})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .appendDeep(new String[][]{new String[]{"one"}}, new String[][]{new String[]{"two"}})
+            .isEquals());
+  }
+
+  @Test
   public void appendDouble() {
     assertTrue(new EqualsBuilder()
             .append(1.0d, 1.0d)
@@ -208,6 +343,82 @@ public class EqualsBuilderTest {
 
     assertFalse(new EqualsBuilder()
             .append(new String[][]{new String[]{"one"}}, new String[][]{new String[]{"one"}})
+            .isEquals());
+  }
+
+  @Test
+  public void appendDoubleArray() {
+    assertTrue(new EqualsBuilder()
+            .append(new double[]{1.0d}, new double[]{1.0d})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(new double[]{1.0d}, new double[]{1.0d, 2.0d})
+            .isEquals());
+    assertFalse(new EqualsBuilder()
+            .append(new double[]{1.0d}, new double[]{2.0d})
+            .isEquals());
+
+    // chaining
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .append(new double[]{1.0d}, new double[]{1.0d})
+            .isEquals());
+
+    // nulls
+    assertFalse(new EqualsBuilder()
+            .append(new double[]{1.0d}, null)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(null, new double[]{1.0d})
+            .isEquals());
+
+    // multi dimensional arrays
+    assertFalse(new EqualsBuilder()
+            .append(new double[][]{new double[]{1.0d}}, new double[]{1.0d})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(new double[][]{new double[]{1.0d}}, new double[][]{new double[]{1.0d}})
+            .isEquals());
+  }
+
+  @Test
+  public void appendFloatArray() {
+    assertTrue(new EqualsBuilder()
+            .append(new float[]{1.0f}, new float[]{1.0f})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(new float[]{1.0f}, new float[]{1.0f, 2.0f})
+            .isEquals());
+    assertFalse(new EqualsBuilder()
+            .append(new float[]{1.0f}, new float[]{2.0f})
+            .isEquals());
+
+    // chaining
+    assertFalse(new EqualsBuilder()
+            .appendSuper(false)
+            .append(new float[]{1.0f}, new float[]{1.0f})
+            .isEquals());
+
+    // nulls
+    assertFalse(new EqualsBuilder()
+            .append(new float[]{1.0f}, null)
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(null, new float[]{1.0f})
+            .isEquals());
+
+    // multi dimensional arrays
+    assertFalse(new EqualsBuilder()
+            .append(new float[][]{new float[]{1.0f}}, new float[]{1.0f})
+            .isEquals());
+
+    assertFalse(new EqualsBuilder()
+            .append(new float[][]{new float[]{1.0f}}, new float[][]{new float[]{1.0f}})
             .isEquals());
   }
 
