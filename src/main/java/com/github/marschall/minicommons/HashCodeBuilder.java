@@ -1,5 +1,6 @@
 package com.github.marschall.minicommons;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -325,7 +326,7 @@ public final class HashCodeBuilder {
           append((boolean[]) object);
         } else {
           // Not an array of primitives
-          append((Object[]) object);
+          appendDeep((Object[]) object);
         }
       } else {
         total = total * MULTPLIER + object.hashCode();
@@ -349,6 +350,18 @@ public final class HashCodeBuilder {
         append(element);
       }
     }
+    return this;
+  }
+
+  /**
+   * Append a <code>hashCode</code> for an <code>Object</code> array.
+   *
+   * @param array
+   *            the array to add to the <code>hashCode</code>
+   * @return this
+   */
+  public HashCodeBuilder appendDeep(Object[] object) {
+    total = total * MULTPLIER + Arrays.deepHashCode(object);
     return this;
   }
 
