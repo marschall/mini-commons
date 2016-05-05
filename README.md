@@ -3,6 +3,14 @@ Mini Commons [![Build Status](https://travis-ci.org/marschall/mini-commons.svg?b
 
 Like [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/) but lighter weight.
 
+```xml
+<dependency>
+    <groupId>com.github.marschall</groupId>
+    <artifactId>mini-commons</artifactId>
+    <version>0.1.0</version>
+</dependency>
+```
+
 For example [org.apache.commons.lang3.builder.EqualsBuilder#append(Object, Object)](https://commons.apache.org/proper/commons-lang/javadocs/api-3.4/org/apache/commons/lang3/builder/EqualsBuilder.html#append(java.lang.Object,%20java.lang.Object)) has a byte code size of 327 which is above the default inline limit of 325. Our version is much smaller because it simply delegates to `java.util.Objects` and can be inlined.
 
 Changes to Apache Commons Lang:
