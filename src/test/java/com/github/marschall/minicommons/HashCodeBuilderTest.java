@@ -10,8 +10,8 @@ public class HashCodeBuilderTest {
   @Test
   public void appendObject() {
 
-    assertEquals(new HashCodeBuilder().append(1).toHashCode(), 630);
-    assertEquals(new HashCodeBuilder().append((Object) null).toHashCode(), 629);
+    assertEquals(new HashCodeBuilder().append(1).toHashCode(), 528);
+    assertEquals(new HashCodeBuilder().append((Object) null).toHashCode(), 527);
 
     // TODO array
   }
@@ -110,6 +110,22 @@ public class HashCodeBuilderTest {
     assertNotEquals(
             new HashCodeBuilder().append(Float.POSITIVE_INFINITY).toHashCode(),
             new HashCodeBuilder().append(Float.NEGATIVE_INFINITY).toHashCode());
+  }
+
+  @Test
+  public void appendBoolean() {
+
+    assertEquals(
+            new HashCodeBuilder().append(true).toHashCode(),
+            new HashCodeBuilder().append(true).toHashCode());
+
+    assertEquals(
+            new HashCodeBuilder().append(false).toHashCode(),
+            new HashCodeBuilder().append(false).toHashCode());
+
+    assertNotEquals(
+            new HashCodeBuilder().append(false).toHashCode(),
+            new HashCodeBuilder().append(true).toHashCode());
   }
 
 }

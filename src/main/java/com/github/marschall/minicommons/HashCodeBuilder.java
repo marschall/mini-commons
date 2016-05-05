@@ -51,7 +51,7 @@ import java.util.Objects;
  */
 public final class HashCodeBuilder {
 
-  private static final int MULTPLIER = 37;
+  private static final int MULTPLIER = 31;
 
   /**
    * Running total of the hashCode.
@@ -70,25 +70,13 @@ public final class HashCodeBuilder {
   /**
    * Append a <code>hashCode</code> for a <code>boolean</code>.
    *
-   * <p>
-   * This adds <code>1</code> when true, and <code>0</code> when false to the <code>hashCode</code>.
-   * </p>
-   * <p>
-   * This is in contrast to the standard <code>java.lang.Boolean.hashCode</code> handling, which computes
-   * a <code>hashCode</code> value of <code>1231</code> for <code>java.lang.Boolean</code> instances
-   * that represent <code>true</code> or <code>1237</code> for <code>java.lang.Boolean</code> instances
-   * that represent <code>false</code>.
-   * </p>
-   * <p>
-   * This is in accordance with the <i>Effective Java</i> design.
-   * </p>
-   *
    * @param value
    *            the boolean to add to the <code>hashCode</code>
    * @return this
+   * @see java.lang.Boolean#hashCode(boolean)
    */
   public HashCodeBuilder append(boolean value) {
-    total = total * MULTPLIER + (value ? 0 : 1);
+    total = total * MULTPLIER + Boolean.hashCode(value);
     return this;
   }
 
@@ -208,7 +196,7 @@ public final class HashCodeBuilder {
    * @return this
    */
   public HashCodeBuilder append(float value) {
-    total = total * MULTPLIER + Float.floatToIntBits(value);
+    total = total * MULTPLIER + Float.hashCode(value);
     return this;
   }
 
