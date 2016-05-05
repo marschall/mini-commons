@@ -308,7 +308,7 @@ public final class HashCodeBuilder {
   /**
    * Append a <code>hashCode</code> for an <code>Object</code> array.
    *
-   * <p>Unlike {@link #append(Object[], Object[])} also deals with
+   * <p>Unlike {@link #append(Object[])} also deals with
    * nested arrays.</p>
    *
    * @param array
@@ -316,8 +316,8 @@ public final class HashCodeBuilder {
    * @return HashCodeBuilder - used to chain calls
    * @see Arrays#deepHashCode(Object[])
    */
-  public HashCodeBuilder appendDeep(Object[] object) {
-    total = total * MULTPLIER + Arrays.deepHashCode(object);
+  public HashCodeBuilder appendDeep(Object[] array) {
+    total = total * MULTPLIER + Arrays.deepHashCode(array);
     return this;
   }
 
