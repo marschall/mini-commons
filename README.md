@@ -1,4 +1,4 @@
-Mini Commons [![Build Status](https://travis-ci.org/marschall/mini-commons.svg?branch=master)](https://travis-ci.org/marschall/mini-commons)
+Mini Commons [![Build Status](https://travis-ci.org/marschall/mini-commons.svg?branch=master)](https://travis-ci.org/marschall/mini-commons) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/mini-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.marschall/mini-commons)
 ============
 
 Like [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/) but lighter weight.
@@ -25,4 +25,6 @@ CommonsBenchmark.equalsCommons         thrpt  100   86.528 ± 0.329  ops/us
 CommonsBenchmark.equalsManual          thrpt  100  230.947 ± 1.048  ops/us
 CommonsBenchmark.equalsMini            thrpt  100  225.705 ± 1.392  ops/us
 ```
+
+[Javadoc](http://www.javadoc.io/doc/com.github.marschall/mini-commons/)
 
