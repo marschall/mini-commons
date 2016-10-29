@@ -1,8 +1,6 @@
 package com.github.marschall.minicommons;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 public final class StringUtils {
 
@@ -19,12 +17,59 @@ public final class StringUtils {
       999_999_999
   };
 
+  private static final long[] LONG_LENGTHS = new long[] {
+      0L,
+      9L,
+      99L,
+      999L,
+      9_999L,
+      99_999L,
+      999_999L,
+      9_999_999L,
+      99_999_999L,
+      999_999_999L,
+      9_999_999_999L,
+      99_999_999_999L,
+      999_999_999_999L,
+      9_999_999_999_999L,
+      99_999_999_999_999L,
+      999_999_999_999_999L,
+      9_999_999_999_999_999L,
+      99_999_999_999_999_999L,
+      999_999_999_999_999_999L,
+  };
+
+  static int toStringLength(Integer i) {
+    if (i == null) {
+      return 0;
+    }
+    return toStringLength(i.intValue());
+  }
+
   static int toStringLength(int i) {
     if (i < 0) {
       throw new IllegalArgumentException("can't padd negative lengths");
     }
     int length = 1;
     while (length < INT_LENGTHS.length && i > INT_LENGTHS[length]) {
+      length += 1;
+    }
+    return length;
+  }
+
+  static int toStringLength(Long l) {
+    if (l == null) {
+      return 0;
+    }
+    return toStringLength(l.longValue());
+  }
+
+  static int toStringLength(long l) {
+    if (l < 0) {
+      throw new IllegalArgumentException("can't padd negative lengths");
+    }
+    int length = 1;
+    while (length < LONG_LENGTHS.length && l > LONG_LENGTHS[length]) {
       length += 1;
     }
     return length;
@@ -75,88 +120,24 @@ public final class StringUtils {
   }
 
   public String leftPad(Integer i, int size, char padChar) {
-    // TODO
-    return null;
+    StringBuilder buf = new StringBuilder(size);
+    int repeat = size - toStringLength(i);
+    repeatInto(padChar, repeat, buf);
+    if (i != null) {
+      buf.append(i.intValue());
+    }
+    return buf.toString();
   }
 
   public String leftPad(Long l, int size, char padChar) {
-    // TODO
-    return null;
-  }
-
-  public static String leftPadOriginal(String str, int size, char padChar) {
-    if (str == null) {
-      return null;
-    }
-    int pads = size - str.length();
-    if (pads <= 0) {
-      return str; // returns original String when possible
-    }
-    return repeat(padChar, pads).concat(str);
-  }
-
-  private static String repeat(char ch, int repeat) {
-    char[] buf = new char[repeat];
-    for (int i = 0; i < repeat; ++i) {
-      buf[i] = ch;
-    }
-    return new String(buf);
-  }
-
-  public static String leftPadFill(String str, int size, char padChar) {
-    if (str == null) {
-      return null;
-    }
-    int pads = size - str.length();
-    if (pads <= 0) {
-      return str; // returns original String when possible
-    }
-    return repeatFill(padChar, pads).concat(str);
-  }
-
-  private static String repeatFill(char ch, int repeat) {
-    char[] buf = new char[repeat];
-    Arrays.fill(buf, ch);
-    return new String(buf);
-  }
-
-  public static String leftPadFillByte(String str, int size, char padChar) {
-    if (str == null) {
-      return null;
-    }
-    int pads = size - str.length();
-    if (pads <= 0) {
-      return str; // returns original String when possible
-    }
-    String prefix;
-    if (padChar <= 255) {
-      prefix = repeatFillLatin1(padChar, pads);
-    } else {
-      prefix = repeatFill(padChar, pads);
-    }
-    return prefix.concat(str);
-  }
-
-  private static String repeatFillLatin1(char ch, int repeat) {
-    byte[] buf = new byte[repeat];
-    Arrays.fill(buf, (byte) ch);
-    return new String(buf, StandardCharsets.ISO_8859_1);
-  }
-
-  public static String leftPadBuilder(String str, int size, char padChar) {
-    if (str == null) {
-      return null;
-    }
-    int pads = size - str.length();
-    if (pads <= 0) {
-      return str; // returns original String when possible
-    }
     StringBuilder buf = new StringBuilder(size);
-    for (int i = 0; i < pads; i++) {
-      buf.append(padChar);
+    int repeat = size - toStringLength(l);
+    repeatInto(padChar, repeat, buf);
+    if (l != null) {
+      buf.append(l.longValue());
     }
-    buf.append(str);
     return buf.toString();
   }
+
 
 }
