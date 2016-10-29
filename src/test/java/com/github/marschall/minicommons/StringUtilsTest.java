@@ -79,4 +79,19 @@ public class StringUtilsTest {
     assertEquals(19, StringUtils.toStringLength(Long.MAX_VALUE));
   }
 
+  @Test
+  public void leftPadInteger() {
+    assertEquals("***", StringUtils.leftPad((Integer) null, 3, '*'));
+    assertEquals("001", StringUtils.leftPad(1, 3, '0'));
+    assertEquals("111", StringUtils.leftPad(111, 3, '0'));
+    assertEquals("1111", StringUtils.leftPad(1111, 3, '0'));
+  }
+  @Test
+  public void leftPadLong() {
+    assertEquals("***", StringUtils.leftPad((Long) null, 3, '*'));
+    assertEquals("001", StringUtils.leftPad(1L, 3, '0'));
+    assertEquals("111", StringUtils.leftPad(111L, 3, '0'));
+    assertEquals("1111", StringUtils.leftPad(1111L, 3, '0'));
+  }
+
 }

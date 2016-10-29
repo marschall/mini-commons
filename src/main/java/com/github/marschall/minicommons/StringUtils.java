@@ -2,6 +2,9 @@ package com.github.marschall.minicommons;
 
 import java.io.IOException;
 
+/**
+ * Utility methods for dealing with {@link String}s.
+ */
 public final class StringUtils {
 
   private static final int[] INT_LENGTHS = new int[] {
@@ -39,6 +42,10 @@ public final class StringUtils {
       999_999_999_999_999_999L,
   };
 
+  private StringUtils() {
+    throw new AssertionError("not instantiable");
+  }
+
   static int toStringLength(Integer i) {
     if (i == null) {
       return 0;
@@ -75,51 +82,67 @@ public final class StringUtils {
     return length;
   }
 
-  private void repeatInto(char padChar, int count, StringBuilder buf) {
+  private static void repeatInto(char padChar, int count, StringBuilder buf) {
     while (count > 0) {
       buf.append(padChar);
       count -= 1;
     }
   }
 
-  private void repeatInto(char padChar, int count, Appendable appendable) throws IOException {
+  private static void repeatInto(char padChar, int count, Appendable appendable) throws IOException {
     while (count > 0) {
       appendable.append(padChar);
       count -= 1;
     }
   }
 
-  public void leftPadInto(String str, int size, char padChar, Appendable appendable) throws IOException {
+  public static void leftPadInto(String str, int size, char padChar, Appendable appendable) throws IOException {
     int toAdd = size - str.length();
     repeatInto(padChar, toAdd, appendable);
     appendable.append(str);
   }
 
-  public void leftPadInto(String str, int size, char padChar, StringBuilder buf) {
+  public static void leftPadInto(String str, int size, char padChar, StringBuilder buf) {
     int toAdd = size - str.length();
     repeatInto(padChar, toAdd, buf);
     buf.append(str);
   }
 
-  public void leftPadInto(Integer i, int size, char padChar, StringBuilder buf) {
+  public static void leftPadInto(Integer i, int size, char padChar, StringBuilder buf) {
     if (i == null) {
       repeatInto(padChar, size, buf);
       return;
     }
-    // TODO
     buf.append(i.intValue());
   }
 
-  public void leftPadInto(Long l, int size, char padChar, StringBuilder buf) {
+  public static void leftPadInto(Long l, int size, char padChar, StringBuilder buf) {
     if (l == null) {
       repeatInto(padChar, size, buf);
       return;
     }
-    // TODO
     buf.append(l.longValue());
   }
 
-  public String leftPad(Integer i, int size, char padChar) {
+  /**
+   * Left pad an Integer with a specified character to a specified length.
+   *
+   * <p>If the given Integer is {@code null} then only the pad character
+   * will be in the final String.</p>
+   *
+   * <pre><code>
+   * StringUtils.leftPad((Integer) null, 3, '*') = "***"
+   * StringUtils.leftPad(1, 3, '0')              = "001"
+   * StringUtils.leftPad(111, 3, '0')            = "111"
+   * StringUtils.leftPad(1111, 3, '0')           = "1111"
+   * </code></pre>
+   *
+   * @param i the Integer to pad, may be {@code null} but not negative
+   * @param size the size to pad to, not negative
+   * @param padChar the character to pad with
+   * @return left padded Integer
+   */
+  public static String leftPad(Integer i, int size, char padChar) {
     StringBuilder buf = new StringBuilder(size);
     int repeat = size - toStringLength(i);
     repeatInto(padChar, repeat, buf);
@@ -129,7 +152,25 @@ public final class StringUtils {
     return buf.toString();
   }
 
-  public String leftPad(Long l, int size, char padChar) {
+  /**
+   * Left pad an Long with a specified character to a specified length.
+   *
+   * <p>If the given Long is {@code null} then only the pad character
+   * will be in the final String.</p>
+   *
+   * <pre><code>
+   * StringUtils.leftPad((Long) null, 3, '*') = "***"
+   * StringUtils.leftPad(1, 3, '0')              = "001"
+   * StringUtils.leftPad(111, 3, '0')            = "111"
+   * StringUtils.leftPad(1111, 3, '0')           = "1111"
+   * </code></pre>
+   *
+   * @param l the Long to pad, may be {@code null} but not negative
+   * @param size the size to pad to, not negative
+   * @param padChar the character to pad with
+   * @return left padded Long
+   */
+  public static String leftPad(Long l, int size, char padChar) {
     StringBuilder buf = new StringBuilder(size);
     int repeat = size - toStringLength(l);
     repeatInto(padChar, repeat, buf);
