@@ -86,12 +86,32 @@ public class StringUtilsTest {
     assertEquals("111", StringUtils.leftPad(111, 3, '0'));
     assertEquals("1111", StringUtils.leftPad(1111, 3, '0'));
   }
+
   @Test
   public void leftPadLong() {
     assertEquals("***", StringUtils.leftPad((Long) null, 3, '*'));
     assertEquals("001", StringUtils.leftPad(1L, 3, '0'));
     assertEquals("111", StringUtils.leftPad(111L, 3, '0'));
     assertEquals("1111", StringUtils.leftPad(1111L, 3, '0'));
+  }
+
+  @Test
+  public void leftPadStringIntoStringBuilder() {
+    StringBuilder buf = new StringBuilder();
+    StringUtils.leftPadInto((String) null, 3, '*', buf);
+    assertEquals("***", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto("1", 3, '0', buf);
+    assertEquals("001", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto("111", 3, '0', buf);
+    assertEquals("111", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto("1111", 3, '0', buf);
+    assertEquals("1111", buf.toString());
   }
 
 }
