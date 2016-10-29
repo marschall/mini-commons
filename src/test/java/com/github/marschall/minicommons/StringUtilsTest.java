@@ -70,6 +70,10 @@ public class StringUtilsTest {
 
     assertEquals(10, StringUtils.toStringLength(1_000_000_000L));
     assertEquals(10, StringUtils.toStringLength((long) Integer.MAX_VALUE));
+    assertEquals(10, StringUtils.toStringLength(9_999_999_999L));
+
+    assertEquals(11, StringUtils.toStringLength(10_000_000_000L));
+    assertEquals(11, StringUtils.toStringLength(99_999_999_999L));
 
     assertEquals(19, StringUtils.toStringLength(1_000_000_000_000_000_000L));
     assertEquals(19, StringUtils.toStringLength(Long.MAX_VALUE));
