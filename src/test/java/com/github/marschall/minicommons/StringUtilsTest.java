@@ -2,6 +2,8 @@ package com.github.marschall.minicommons;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 public class StringUtilsTest {
@@ -98,6 +100,25 @@ public class StringUtilsTest {
   @Test
   public void leftPadStringIntoStringBuilder() {
     StringBuilder buf = new StringBuilder();
+    StringUtils.leftPadInto((String) null, 3, '*', buf);
+    assertEquals("***", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto("1", 3, '0', buf);
+    assertEquals("001", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto("111", 3, '0', buf);
+    assertEquals("111", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto("1111", 3, '0', buf);
+    assertEquals("1111", buf.toString());
+  }
+
+  @Test
+  public void leftPadStringIntoAppendable() throws IOException {
+    Appendable buf = new StringBuilder();
     StringUtils.leftPadInto((String) null, 3, '*', buf);
     assertEquals("***", buf.toString());
 

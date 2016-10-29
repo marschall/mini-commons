@@ -96,10 +96,33 @@ public final class StringUtils {
     }
   }
 
+  /**
+   * Left pad an String with a specified character to a specified length
+   * into a specified Appendable.
+   *
+   * <p>If the given Long is {@code null} then only the pad character
+   * will be appended.</p>
+   *
+   * <pre><code>
+   * StringUtils.leftPadInto((Integer) null, 3, '*', buf) = "***"
+   * StringUtils.leftPadInto(1, 3, '0', buf)              = "001"
+   * StringUtils.leftPadInto(111, 3, '0', buf)            = "111"
+   * StringUtils.leftPadInto(1111, 3, '0', buf)           = "1111"
+   * </code></pre>
+   *
+   * @param str the String to pad, may be {@code null} but not negative
+   * @param size the size to pad to, not negative
+   * @param padChar the character to pad with
+   * @param appendable the appendable into which to pad
+   */
   public static void leftPadInto(String str, int size, char padChar, Appendable appendable) throws IOException {
-    int toAdd = size - str.length();
-    repeatInto(padChar, toAdd, appendable);
-    appendable.append(str);
+    if (str != null) {
+      int toAdd = size - str.length();
+      repeatInto(padChar, toAdd, appendable);
+      appendable.append(str);
+    } else {
+      repeatInto(padChar, size, appendable);
+    }
   }
 
   /**
