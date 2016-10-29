@@ -97,7 +97,7 @@ public final class StringUtils {
   }
 
   /**
-   * Left pad an String with a specified character to a specified length
+   * Left pad a String with a specified character to a specified length
    * into a specified Appendable.
    *
    * <p>If the given Long is {@code null} then only the pad character
@@ -117,8 +117,8 @@ public final class StringUtils {
    */
   public static void leftPadInto(String str, int size, char padChar, Appendable appendable) throws IOException {
     if (str != null) {
-      int toAdd = size - str.length();
-      repeatInto(padChar, toAdd, appendable);
+      int repeat = size - str.length();
+      repeatInto(padChar, repeat, appendable);
       appendable.append(str);
     } else {
       repeatInto(padChar, size, appendable);
@@ -126,17 +126,17 @@ public final class StringUtils {
   }
 
   /**
-   * Left pad an String with a specified character to a specified length
+   * Left pad a String with a specified character to a specified length
    * into a specified StringBuilder.
    *
-   * <p>If the given Long is {@code null} then only the pad character
+   * <p>If the given String is {@code null} then only the pad character
    * will be appended.</p>
    *
    * <pre><code>
-   * StringUtils.leftPadInto((Integer) null, 3, '*', buf) = "***"
-   * StringUtils.leftPadInto(1, 3, '0', buf)              = "001"
-   * StringUtils.leftPadInto(111, 3, '0', buf)            = "111"
-   * StringUtils.leftPadInto(1111, 3, '0', buf)           = "1111"
+   * StringUtils.leftPadInto((String) null, 3, '*', buf) = "***"
+   * StringUtils.leftPadInto("1", 3, '0', buf)           = "001"
+   * StringUtils.leftPadInto("111", 3, '0', buf)         = "111"
+   * StringUtils.leftPadInto("1111", 3, '0', buf)        = "1111"
    * </code></pre>
    *
    * @param str the String to pad, may be {@code null} but not negative
@@ -146,28 +146,70 @@ public final class StringUtils {
    */
   public static void leftPadInto(String str, int size, char padChar, StringBuilder buf) {
     if (str != null) {
-      int toAdd = size - str.length();
-      repeatInto(padChar, toAdd, buf);
+      int repeat = size - str.length();
+      repeatInto(padChar, repeat, buf);
       buf.append(str);
     } else {
       repeatInto(padChar, size, buf);
     }
   }
 
+  /**
+   * Left pad an Integer with a specified character to a specified length
+   * into a specified StringBuilder.
+   *
+   * <p>If the given Integer is {@code null} then only the pad character
+   * will be appended.</p>
+   *
+   * <pre><code>
+   * StringUtils.leftPadInto((Integer) null, 3, '*', buf) = "***"
+   * StringUtils.leftPadInto(1, 3, '0', buf)              = "001"
+   * StringUtils.leftPadInto(111, 3, '0', buf)            = "111"
+   * StringUtils.leftPadInto(1111, 3, '0', buf)           = "1111"
+   * </code></pre>
+   *
+   * @param str the Integer to pad, may be {@code null} but not negative
+   * @param size the size to pad to, not negative
+   * @param padChar the character to pad with
+   * @param buf the buffer into which to pad
+   */
   public static void leftPadInto(Integer i, int size, char padChar, StringBuilder buf) {
     if (i == null) {
       repeatInto(padChar, size, buf);
-      return;
+    } else {
+      int repeat = size - toStringLength(i);
+      repeatInto(padChar, repeat, buf);
+      buf.append(i.intValue());
     }
-    buf.append(i.intValue());
   }
 
+  /**
+   * Left pad a Long with a specified character to a specified length
+   * into a specified StringBuilder.
+   *
+   * <p>If the given Long is {@code null} then only the pad character
+   * will be appended.</p>
+   *
+   * <pre><code>
+   * StringUtils.leftPadInto((Long) null, 3, '*', buf) = "***"
+   * StringUtils.leftPadInto(1L, 3, '0', buf)          = "001"
+   * StringUtils.leftPadInto(111L, 3, '0', buf)        = "111"
+   * StringUtils.leftPadInto(1111L, 3, '0', buf)       = "1111"
+   * </code></pre>
+   *
+   * @param l the Long to pad, may be {@code null} but not negative
+   * @param size the size to pad to, not negative
+   * @param padChar the character to pad with
+   * @param buf the buffer into which to pad
+   */
   public static void leftPadInto(Long l, int size, char padChar, StringBuilder buf) {
     if (l == null) {
       repeatInto(padChar, size, buf);
-      return;
+    } else {
+      int repeat = size - toStringLength(l);
+      repeatInto(padChar, repeat, buf);
+      buf.append(l.longValue());
     }
-    buf.append(l.longValue());
   }
 
   /**

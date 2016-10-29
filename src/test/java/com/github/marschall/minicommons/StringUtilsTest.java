@@ -135,4 +135,42 @@ public class StringUtilsTest {
     assertEquals("1111", buf.toString());
   }
 
+  @Test
+  public void leftPadIntegerIntoStringBuilder() {
+    StringBuilder buf = new StringBuilder();
+    StringUtils.leftPadInto((Integer) null, 3, '*', buf);
+    assertEquals("***", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto(1, 3, '0', buf);
+    assertEquals("001", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto(111, 3, '0', buf);
+    assertEquals("111", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto(1111, 3, '0', buf);
+    assertEquals("1111", buf.toString());
+  }
+
+  @Test
+  public void leftPadLongIntoStringBuilder() {
+    StringBuilder buf = new StringBuilder();
+    StringUtils.leftPadInto((Long) null, 3, '*', buf);
+    assertEquals("***", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto(1L, 3, '0', buf);
+    assertEquals("001", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto(111L, 3, '0', buf);
+    assertEquals("111", buf.toString());
+
+    buf = new StringBuilder();
+    StringUtils.leftPadInto(1111L, 3, '0', buf);
+    assertEquals("1111", buf.toString());
+  }
+
 }
