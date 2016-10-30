@@ -168,7 +168,7 @@ public final class StringUtils {
    * StringUtils.leftPadInto(1111, 3, '0', buf)           = "1111"
    * </code></pre>
    *
-   * @param str the Integer to pad, may be {@code null} but not negative
+   * @param i the Integer to pad, may be {@code null} but not negative
    * @param size the size to pad to, not negative
    * @param padChar the character to pad with
    * @param buf the buffer into which to pad
