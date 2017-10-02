@@ -24,6 +24,7 @@ public class CommonsBenchmark {
             .include(".*CommonsBenchmark.*")
             .warmupIterations(10)
             .measurementIterations(10)
+            .forks(10)
             .build();
     new Runner(options).run();
   }
